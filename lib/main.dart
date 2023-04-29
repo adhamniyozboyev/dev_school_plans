@@ -17,22 +17,20 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          body: TextFormField(
+          body: Column(
+        children: [
+          TextFormField(
             inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp('[a-z]'))
+              // FilteringTextInputFormatter.allow(RegExp('[a-z]')),
+              FilteringTextInputFormatter.allow(RegExp('[A-Z]'))
             ],
-        decoration: InputDecoration(
-            icon: Icon(Icons.person),
-            hintText: 'What is your name',
-            labelText: 'Name*'),
-        onSaved: (String? value) {
-          setState(() {});
-        },
-        validator: (String? value) {
-          return (value != null && value.contains('@')
-              ? 'Don\'t use a @ char.'
-              : null);
-        },
+            decoration: InputDecoration(
+                errorText: 'Error text',
+                icon: Icon(Icons.person),
+                hintText: 'What is your name',
+                labelText: 'Name*'),
+          ),
+        ],
       )),
     );
   }
