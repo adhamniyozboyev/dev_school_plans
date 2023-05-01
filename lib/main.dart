@@ -1,37 +1,72 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+Widget getInfo(double height, double width,
+    [double topRight = 0, topLeft = 0, bottomRight = 0, bottomLeft = 0]) {
+  return Container(
+    decoration: BoxDecoration(
+        color: Colors.blue,
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(topRight),
+            topLeft: Radius.circular(topLeft),
+            bottomRight: Radius.circular(bottomRight),
+            bottomLeft: Radius.circular(bottomLeft))),
+    height: height,
+    width: width,
+  );
+}
 
 void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-          body: Column(
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          TextFormField(
-            inputFormatters: [
-              // FilteringTextInputFormatter.allow(RegExp('[a-z]')),
-              FilteringTextInputFormatter.allow(RegExp('[A-Z]'))
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              getInfo(70, 70, 0, 0, 20, 0),
+              getInfo(70, 70, 0, 0, 0, 20)
             ],
-            decoration: InputDecoration(
-                errorText: 'Error text',
-                icon: Icon(Icons.person),
-                hintText: 'What is your name',
-                labelText: 'Name*'),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      getInfo(40, 40, 0, 20, 0, 0),
+                      SizedBox(
+                        width: 30,
+                      ),
+                      getInfo(40, 40, 20, 0, 0, 0),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    children: [
+                      getInfo(40, 40, 0, 0, 0, 20),
+                      SizedBox(
+                        width: 30,
+                      ),
+                      getInfo(40, 40, 0, 0, 20, 0),
+                    ],
+                  ),
+                ],
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [getInfo(70, 70, 20), getInfo(70, 70, 0, 20)],
           ),
         ],
-      )),
-    );
-  }
+      ),
+    ),
+  ));
 }
